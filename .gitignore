@@ -1,0 +1,45 @@
+# Ignore object files and binaries
+*.o
+*.bin
+*.elf
+*.iso
+
+# Ignore executables
+boot
+kernel
+program
+
+# Ignore temporary files
+*.tmp
+*.swp
+*.swo
+
+# Ignore NASM listing and debugging files
+*.lst
+*.map
+*.dbg
+
+# Ignore core dumps
+core
+
+# Ignore build directories
+/build/
+/out/
+
+# Ignore log files
+*.log
+bochsout.txt
+qemu.log
+
+# Ignore QEMU specific files
+*.qcow2
+*.vdi
+*.vmdk
+
+# Ignore .DS_Store (macOS file)
+.DS_Store
+
+# Ignore virtual environment files (if any Python scripts or tools are used)
+venv/
+__pycache__/
+*.pyc
