@@ -10,6 +10,21 @@ times 33 db 0
 start:
     jmp 0x7C0:step2
 
+handle_zero:
+    mov ah, oeh
+    mov al, 'A'
+    xor bx, bx
+    int 0x10
+    iret
+
+handle_one:
+    mov ah, 0eh
+    mov al, 'V'
+    xor bx, bx
+    int 0x10
+    iret
+    
+
 step2:
     cli                     ; Clear Interrupt Flag
 
@@ -21,7 +36,17 @@ step2:
     mov ss, ax
     mov sp, 0x7C00
 
-    sti                     ; Enable Interrupt Flag
+    sti  
+    
+    mov word[ss:0x00], handle_zero
+    mov word[ss:0x02], 0x7C0
+
+    mov word[ss:0x04], handle_one
+    mov word[ss:0x06], 0x7C0
+    
+    int 0  
+    
+    int 1                ; Enable Interrupt Flag
 
     mov si, message         ; Load message address
     call print              ; Print the message
