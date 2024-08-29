@@ -1,22 +1,32 @@
 ORG 0
 BITS 16
 
-start:
-    cli; Clear Intrupt Flag
+_start:
+    jmp short start
+    nop
 
-    mov ax, 0x7c0
+times 33 db 0
+
+start:
+    jmp 0x7C0:step2
+
+step2:
+    cli                     ; Clear Interrupt Flag
+
+    mov ax, 0x7C0           ; Set up data segment
     mov ds, ax
     mov es, ax
 
-    mov ax, 0x00
+    xor ax, ax              ; Set up stack
     mov ss, ax
-    mov sp, 0x7c00
+    mov sp, 0x7C00
 
-    sti; Enable Interrupt Flag
+    sti                     ; Enable Interrupt Flag
 
-    mov si, message
-    call print
-    jmp $
+    mov si, message         ; Load message address
+    call print              ; Print the message
+    
+    jmp $                   ; Infinite loop
 
 print:
     mov bx, 0
