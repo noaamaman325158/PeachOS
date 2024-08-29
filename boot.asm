@@ -1,11 +1,23 @@
-ORG 0x7c00
+ORG 0
 BITS 16
 
 start:
+    cli; Clear Intrupt Flag
+
+    mov ax, 0x7c0
+    mov ds, ax
+    mov es, ax
+
+    mov ax, 0x00
+    mov ss, ax
+    mov sp, 0x7c00
+
+    sti; Enable Interrupt Flag
+
     mov si, message
     call print
     jmp $
-    
+
 print:
     mov bx, 0
 .loop:
