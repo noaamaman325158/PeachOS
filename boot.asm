@@ -23,17 +23,6 @@ step2:
 
     sti           ; Print the message
     
-    mov ah, 2  ; READ SECTOR COMMAND 
-    mov al, 1  ; READ 1 SECTOR
-    mov ch, 0  ; Cylinder LOW EIGHT BITS
-    mov cl, 2  ; Read sector 2
-    mov dh, 0  ; Head number
-    mov bx, buffer
-    int 0x13
-    jc disk_error
-
-    mov si, buffer
-    call print
     
     jmp $  
 
