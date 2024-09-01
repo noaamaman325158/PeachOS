@@ -13,6 +13,7 @@ program
 *.tmp
 *.swp
 *.swo
+*.txt
 
 # Ignore NASM listing and debugging files
 *.lst
