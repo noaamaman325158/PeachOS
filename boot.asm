@@ -11,7 +11,7 @@ start:
     jmp 0x7C0:step2
 
 handle_zero:
-    mov ah, oeh
+    mov ah, 0eh
     mov al, 'A'
     xor bx, bx
     int 0x10
