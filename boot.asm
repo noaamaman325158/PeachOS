@@ -23,7 +23,24 @@ step2:
 
     sti           ; Print the message
     
-    jmp $                   ; Infinite loop
+    mov ah, 2  ; READ SECTOR COMMAND 
+    mov al, 1  ; READ 1 SECTOR
+    mov ch, 0  ; Cylinder LOW EIGHT BITS
+    mov cl, 2  ; Read sector 2
+    mov dh, 0  ; Head number
+    mov bx, buffer
+    int 0x13
+    jc disk_error
+
+    mov si, buffer
+    call print
+    
+    jmp $  
+
+disk_error:
+    mov si, error_message
+    call print
+    jmp $
 
 print:
     mov bx, 0
@@ -42,8 +59,14 @@ print_char:
     ret
     
 
+error_message db 'Failed to load sector', 0
 
 times 510-($-$$) db 0
 dw 0xAA55
+
+
+buffer:
+
+
 
 
