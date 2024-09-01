@@ -26,10 +26,6 @@ step2:
     
     jmp $  
 
-disk_error:
-    mov si, error_message
-    call print
-    jmp $
 
 print:
     mov bx, 0
